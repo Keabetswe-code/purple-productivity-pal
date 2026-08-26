@@ -112,7 +112,7 @@ function ChatPage() {
 
             {messages.map((message) => (
               <Message key={message.id} from={message.role}>
-                <MessageContent variant={message.role === "user" ? "contained" : "flat"}>
+                <MessageContent>
                   {message.parts.map((part, index) =>
                     part.type === "text" ? (
                       <MessageResponse key={index}>{part.text}</MessageResponse>
