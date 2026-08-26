@@ -119,8 +119,28 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <SidebarProvider>
+        <div className="flex min-h-screen w-full bg-background">
+          <AppSidebar />
+          <div className="flex min-w-0 flex-1 flex-col">
+            <header className="sticky top-0 z-10 flex h-14 items-center gap-3 border-b border-border bg-background/80 px-4 backdrop-blur">
+              <SidebarTrigger />
+              <span className="text-sm font-semibold text-foreground">
+                Aurora · AI Workplace Productivity Assistant
+              </span>
+            </header>
+            <main className="flex-1 p-4 md:p-6 lg:p-8">
+              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+              <Outlet />
+            </main>
+            <footer className="border-t border-border px-4 py-4 text-xs text-muted-foreground md:px-8">
+              Aurora is an AI assistant. Verify important information before acting on it.
+            </footer>
+          </div>
+        </div>
+        <Toaster richColors position="top-right" />
+      </SidebarProvider>
     </QueryClientProvider>
   );
 }
+
