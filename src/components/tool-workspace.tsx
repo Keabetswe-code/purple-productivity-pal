@@ -81,34 +81,43 @@ export function ToolWorkspace({
   }
 
   return (
-    <div className="space-y-6">
-      <header className="bg-hero-gradient relative overflow-hidden rounded-2xl p-6 text-primary-foreground shadow-elegant">
-        <div className="flex items-center gap-3">
-          <span className="flex size-11 items-center justify-center rounded-xl bg-white/15">
+    <div className="space-y-8">
+      <header className="bg-hero-gradient shadow-elegant relative overflow-hidden rounded-[1.75rem] p-7 text-primary-foreground md:p-10">
+        <div className="pointer-events-none absolute inset-0 opacity-25 mix-blend-overlay [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:20px_20px]" />
+        <div className="animate-float pointer-events-none absolute -right-16 -top-20 size-64 rounded-full bg-accent/50 blur-3xl" />
+        <div className="animate-drift pointer-events-none absolute -bottom-24 right-24 size-56 rounded-full bg-maroon/50 blur-3xl" />
+        <div className="relative flex items-center gap-4">
+          <span className="flex size-14 items-center justify-center rounded-2xl border border-white/25 bg-white/15 backdrop-blur">
             {icon}
           </span>
           <div>
-            <h1 className="text-2xl font-bold">{title}</h1>
-            <p className="text-sm opacity-85">{description}</p>
+            <h1 className="text-2xl font-black tracking-tight md:text-3xl">{title}</h1>
+            <p className="mt-1 text-sm opacity-85 md:text-base">{description}</p>
           </div>
         </div>
       </header>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
-        <Card className="h-fit">
+        <Card className="glass gradient-border animate-rise h-fit rounded-2xl">
           <CardHeader>
-            <CardTitle className="text-base">Structured prompt</CardTitle>
+            <CardTitle className="flex items-center gap-2 text-base">
+              <span className="bg-primary-gradient size-2 rounded-full" />
+              Structured prompt
+            </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-5">
             {fields.map((field) => (
               <div key={field.name} className="space-y-2">
-                <Label htmlFor={field.name}>{field.label}</Label>
+                <Label htmlFor={field.name} className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  {field.label}
+                </Label>
                 {field.type === "text" && (
                   <Input
                     id={field.name}
                     value={values[field.name] ?? ""}
                     placeholder={field.placeholder ?? ""}
                     maxLength={300}
+                    className="rounded-xl bg-background/60"
                     onChange={(e) => setValue(field.name, e.target.value)}
                   />
                 )}
@@ -119,6 +128,7 @@ export function ToolWorkspace({
                     maxLength={6000}
                     value={values[field.name] ?? ""}
                     placeholder={field.placeholder ?? ""}
+                    className="rounded-xl bg-background/60"
                     onChange={(e) => setValue(field.name, e.target.value)}
                   />
                 )}
@@ -127,7 +137,7 @@ export function ToolWorkspace({
                     value={values[field.name] ?? ""}
                     onValueChange={(v) => setValue(field.name, v)}
                   >
-                    <SelectTrigger id={field.name}>
+                    <SelectTrigger id={field.name} className="rounded-xl bg-background/60">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -142,7 +152,12 @@ export function ToolWorkspace({
               </div>
             ))}
 
-            <Button onClick={handleGenerate} disabled={loading} className="w-full" size="lg">
+            <Button
+              onClick={handleGenerate}
+              disabled={loading}
+              size="lg"
+              className="bg-primary-gradient glow-primary w-full rounded-xl text-primary-foreground transition-transform hover:scale-[1.02]"
+            >
               {loading ? (
                 <>
                   <Loader2 className="animate-spin" /> Generating…
@@ -156,18 +171,22 @@ export function ToolWorkspace({
           </CardContent>
         </Card>
 
-        <Card className="min-h-[420px]">
+        <Card className="glass gradient-border animate-rise min-h-[460px] rounded-2xl" style={{ animationDelay: "80ms" }}>
           <CardHeader className="flex flex-row items-center justify-between gap-2 space-y-0">
-            <CardTitle className="text-base">Editable output</CardTitle>
+            <CardTitle className="flex items-center gap-2 text-base">
+              <span className="bg-ember-gradient size-2 rounded-full" />
+              Editable output
+            </CardTitle>
             {output && (
               <div className="flex flex-wrap gap-2">
-                <Button variant="outline" size="sm" onClick={() => setEditing((e) => !e)}>
+                <Button variant="outline" size="sm" className="rounded-full" onClick={() => setEditing((e) => !e)}>
                   {editing ? <Eye /> : <Pencil />}
                   {editing ? "Preview" : "Edit"}
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
+                  className="rounded-full"
                   onClick={() => {
                     void navigator.clipboard.writeText(output);
                     toast.success("Copied to clipboard");
@@ -175,7 +194,7 @@ export function ToolWorkspace({
                 >
                   <Copy /> Copy
                 </Button>
-                <Button variant="outline" size="sm" onClick={download}>
+                <Button variant="outline" size="sm" className="rounded-full" onClick={download}>
                   <Download /> Save
                 </Button>
               </div>
@@ -183,14 +202,27 @@ export function ToolWorkspace({
           </CardHeader>
           <CardContent>
             {!output && !loading && (
-              <p className="py-16 text-center text-sm text-muted-foreground">
-                Fill in the prompt fields and generate a draft. Everything stays editable.
-              </p>
+              <div className="flex flex-col items-center gap-3 py-20 text-center">
+                <span className="bg-primary-gradient animate-pulse-ring flex size-12 items-center justify-center rounded-2xl text-primary-foreground">
+                  <Sparkle className="size-5" />
+                </span>
+                <p className="max-w-xs text-sm text-muted-foreground">
+                  Fill in the prompt fields and generate a draft. Everything stays editable.
+                </p>
+              </div>
             )}
             {loading && !output && (
-              <div className="flex flex-col items-center gap-3 py-16 text-muted-foreground">
-                <Loader2 className="size-6 animate-spin text-primary" />
-                <p className="text-sm">EnO is drafting…</p>
+              <div className="space-y-3 py-10">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Loader2 className="size-4 animate-spin text-primary" /> EnO is drafting…
+                </div>
+                {[92, 80, 96, 70, 88, 60].map((w, i) => (
+                  <div
+                    key={i}
+                    className="bg-primary-gradient h-3 animate-pulse rounded-full opacity-20"
+                    style={{ width: `${w}%`, animationDelay: `${i * 120}ms` }}
+                  />
+                ))}
               </div>
             )}
             {output &&
@@ -199,10 +231,10 @@ export function ToolWorkspace({
                   value={output}
                   rows={20}
                   onChange={(e) => setOutput(e.target.value)}
-                  className="font-mono text-xs"
+                  className="rounded-xl bg-background/60 font-mono text-xs"
                 />
               ) : (
-                <div className="prose-ai text-sm">
+                <div className="prose-ai animate-rise text-sm">
                   <ReactMarkdown>{output}</ReactMarkdown>
                 </div>
               ))}
@@ -214,3 +246,4 @@ export function ToolWorkspace({
     </div>
   );
 }
+
