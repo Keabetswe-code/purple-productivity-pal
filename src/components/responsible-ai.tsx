@@ -3,11 +3,14 @@ import { ShieldCheck } from "lucide-react";
 export function ResponsibleAiNotice({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`flex gap-3 rounded-xl border border-border bg-secondary/60 p-4 text-sm text-muted-foreground ${className}`}
+      className={`glass gradient-border relative flex gap-4 overflow-hidden rounded-2xl p-5 text-sm text-muted-foreground ${className}`}
     >
-      <ShieldCheck className="mt-0.5 size-4 shrink-0 text-primary" />
-      <p>
-        <span className="font-medium text-foreground">Responsible AI:</span> EnO generates
+      <div className="pointer-events-none absolute -left-10 -top-10 size-32 rounded-full bg-accent/20 blur-2xl" />
+      <span className="bg-primary-gradient relative flex size-9 shrink-0 items-center justify-center rounded-xl text-primary-foreground">
+        <ShieldCheck className="size-4" />
+      </span>
+      <p className="relative leading-relaxed">
+        <span className="font-semibold text-foreground">Responsible AI:</span> EnO generates
         drafts that can be incomplete or inaccurate. Review and edit every output, avoid sharing
         confidential or personal data, and keep a human decision-maker accountable for anything
         you send or act on.
