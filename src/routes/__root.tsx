@@ -129,20 +129,30 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <SidebarProvider>
-        <div className="flex min-h-screen w-full bg-background">
+        <div className="relative flex min-h-screen w-full bg-background">
+          <div className="bg-aurora pointer-events-none fixed inset-0 -z-10" />
+          <div className="bg-grid pointer-events-none fixed inset-0 -z-10 opacity-60" />
           <AppSidebar />
           <div className="flex min-w-0 flex-1 flex-col">
-            <header className="sticky top-0 z-10 flex h-14 items-center gap-3 border-b border-border bg-background/80 px-4 backdrop-blur">
+            <header className="sticky top-0 z-20 flex h-16 items-center gap-3 border-b border-border/60 bg-background/60 px-4 backdrop-blur-xl md:px-6">
               <SidebarTrigger />
-              <span className="text-sm font-semibold text-foreground">
-                EnO · AI Workplace Productivity Assistant
+              <div className="flex min-w-0 items-center gap-2">
+                <span className="bg-primary-gradient hidden size-2.5 shrink-0 rounded-full md:block" />
+                <span className="truncate text-sm font-semibold tracking-tight">
+                  <span className="text-gradient text-base font-extrabold">EnO</span>
+                  <span className="text-muted-foreground"> · AI Workplace Productivity</span>
+                </span>
+              </div>
+              <span className="ml-auto hidden items-center gap-2 rounded-full border border-border/70 bg-card/60 px-3 py-1 text-xs text-muted-foreground backdrop-blur sm:inline-flex">
+                <span className="size-1.5 animate-pulse rounded-full bg-accent" />
+                AI online
               </span>
             </header>
-            <main className="flex-1 p-4 md:p-6 lg:p-8">
+            <main className="animate-rise flex-1 p-4 md:p-6 lg:p-10">
               {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
               <Outlet />
             </main>
-            <footer className="border-t border-border px-4 py-4 text-xs text-muted-foreground md:px-8">
+            <footer className="border-t border-border/60 px-4 py-5 text-xs text-muted-foreground md:px-10">
               EnO is an AI assistant. Verify important information before acting on it.
             </footer>
           </div>
@@ -152,4 +162,5 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
+
 
