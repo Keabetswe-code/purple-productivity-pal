@@ -190,7 +190,7 @@ export function ToolWorkspace({
             {loading && !output && (
               <div className="flex flex-col items-center gap-3 py-16 text-muted-foreground">
                 <Loader2 className="size-6 animate-spin text-primary" />
-                <p className="text-sm">Aurora is drafting…</p>
+                <p className="text-sm">EnO is drafting…</p>
               </div>
             )}
             {output &&

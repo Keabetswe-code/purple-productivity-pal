@@ -80,14 +80,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Aurora — AI Workplace Productivity Assistant" },
+      { title: "EnO — AI Workplace Productivity Assistant" },
       {
         name: "description",
         content:
           "Automate workplace tasks with AI: emails, meeting summaries, task plans, research and chat.",
       },
-      { name: "author", content: "Aurora" },
-      { property: "og:title", content: "Aurora — AI Workplace Productivity Assistant" },
+      { name: "author", content: "EnO" },
+      { property: "og:title", content: "EnO — AI Workplace Productivity Assistant" },
       {
         property: "og:description",
         content: "One AI workspace for emails, meeting notes, task planning, research and chat.",
@@ -135,7 +135,7 @@ function RootComponent() {
             <header className="sticky top-0 z-10 flex h-14 items-center gap-3 border-b border-border bg-background/80 px-4 backdrop-blur">
               <SidebarTrigger />
               <span className="text-sm font-semibold text-foreground">
-                Aurora · AI Workplace Productivity Assistant
+                EnO · AI Workplace Productivity Assistant
               </span>
             </header>
             <main className="flex-1 p-4 md:p-6 lg:p-8">
@@ -143,7 +143,7 @@ function RootComponent() {
               <Outlet />
             </main>
             <footer className="border-t border-border px-4 py-4 text-xs text-muted-foreground md:px-8">
-              Aurora is an AI assistant. Verify important information before acting on it.
+              EnO is an AI assistant. Verify important information before acting on it.
             </footer>
           </div>
         </div>

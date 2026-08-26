@@ -46,7 +46,7 @@ export function AppSidebar() {
           </span>
           {!collapsed && (
             <div className="leading-tight">
-              <p className="text-sm font-semibold">Aurora</p>
+              <p className="text-sm font-semibold">EnO</p>
               <p className="text-xs opacity-70">Workplace AI</p>
             </div>
           )}

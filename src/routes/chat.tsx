@@ -24,13 +24,13 @@ import { ResponsibleAiNotice } from "@/components/responsible-ai";
 export const Route = createFileRoute("/chat")({
   head: () => ({
     meta: [
-      { title: "AI Chatbot | Aurora Workplace AI" },
+      { title: "AI Chatbot | EnO Workplace AI" },
       {
         name: "description",
         content:
-          "Chat with Aurora, an AI workplace assistant that drafts, plans, summarizes and researches alongside you.",
+          "Chat with EnO, an AI workplace assistant that drafts, plans, summarizes and researches alongside you.",
       },
-      { property: "og:title", content: "AI Chatbot | Aurora Workplace AI" },
+      { property: "og:title", content: "AI Chatbot | EnO Workplace AI" },
       {
         property: "og:description",
         content: "A conversational AI assistant for everyday workplace tasks.",
@@ -78,7 +78,7 @@ function ChatPage() {
           </span>
           <div>
             <h1 className="text-2xl font-bold">AI Chatbot</h1>
-            <p className="text-sm opacity-85">Ask Aurora anything about your work day.</p>
+            <p className="text-sm opacity-85">Ask EnO anything about your work day.</p>
           </div>
         </div>
         {messages.length > 0 && (
@@ -122,7 +122,7 @@ function ChatPage() {
               </Message>
             ))}
 
-            {status === "submitted" && <Shimmer>Aurora is thinking…</Shimmer>}
+            {status === "submitted" && <Shimmer>EnO is thinking…</Shimmer>}
           </ConversationContent>
           <ConversationScrollButton />
         </Conversation>

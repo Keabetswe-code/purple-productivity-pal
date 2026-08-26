@@ -5,13 +5,13 @@ import { ToolWorkspace } from "@/components/tool-workspace";
 export const Route = createFileRoute("/planner")({
   head: () => ({
     meta: [
-      { title: "AI Task Planner | Aurora Workplace AI" },
+      { title: "AI Task Planner | EnO Workplace AI" },
       {
         name: "description",
         content:
           "Turn goals and deadlines into a prioritised, time-blocked work plan with dependencies and next actions.",
       },
-      { property: "og:title", content: "AI Task Planner | Aurora Workplace AI" },
+      { property: "og:title", content: "AI Task Planner | EnO Workplace AI" },
       {
         property: "og:description",
         content: "Prioritised, time-blocked plans generated from your goals and deadlines.",

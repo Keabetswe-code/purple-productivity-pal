@@ -18,13 +18,13 @@ import { ResponsibleAiNotice } from "@/components/responsible-ai";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Aurora — AI Workplace Productivity Assistant" },
+      { title: "EnO — AI Workplace Productivity Assistant" },
       {
         name: "description",
         content:
           "Automate workplace tasks with AI: draft emails, summarize meetings, plan work, research topics and chat with an AI assistant.",
       },
-      { property: "og:title", content: "Aurora — AI Workplace Productivity Assistant" },
+      { property: "og:title", content: "EnO — AI Workplace Productivity Assistant" },
       {
         property: "og:description",
         content: "One AI workspace for emails, meeting notes, task planning, research and chat.",
@@ -85,7 +85,7 @@ function Dashboard() {
             AI Workplace Productivity Assistant
           </h1>
           <p className="text-base opacity-90 md:text-lg">
-            Aurora automates the writing, planning and thinking work around your job — so you
+            EnO automates the writing, planning and thinking work around your job — so you
             spend your day on decisions, not drafts.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">

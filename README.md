@@ -1,4 +1,4 @@
-# Aurora — AI Workplace Productivity Assistant
+# EnO — AI Workplace Productivity Assistant
 
 A modern, responsive SaaS-style web app that helps professionals automate everyday workplace
 tasks with AI: drafting emails, summarizing meetings, planning work, researching topics and
@@ -81,6 +81,6 @@ bun run lint
 
 ## Responsible AI
 
-Aurora produces drafts that can be incomplete or inaccurate. Review and edit every output, avoid
+EnO produces drafts that can be incomplete or inaccurate. Review and edit every output, avoid
 entering confidential or personal data, and keep a human accountable for anything sent or acted
 upon. AI outputs are not legal, financial, medical or HR advice.
