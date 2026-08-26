@@ -7,7 +7,7 @@ const GenerateInput = z.object({
   prompt: z.string().trim().min(1).max(8000),
 });
 
-const SYSTEM_PROMPTS: Record<string, string> = {
+const SYSTEM_PROMPTS: Record<z.infer<typeof GenerateInput>["tool"], string> = {
   email: [
     "You are a professional workplace email writer.",
     "Return a complete email with a 'Subject:' line, greeting, concise body paragraphs and a sign-off.",
