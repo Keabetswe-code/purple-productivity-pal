@@ -7,6 +7,7 @@ import {
   Telescope,
   MessagesSquare,
   BrainCircuit,
+  ShieldCheck,
 } from "lucide-react";
 
 import {
@@ -38,16 +39,16 @@ export function AppSidebar() {
   const pathname = useRouterState({ select: (r) => r.location.pathname });
 
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible="icon" className="border-r-0">
       <SidebarHeader>
-        <div className="flex items-center gap-2 px-1 py-2">
-          <span className="bg-ember-gradient flex size-9 shrink-0 items-center justify-center rounded-xl">
+        <div className="flex items-center gap-3 px-1 py-3">
+          <span className="bg-ember-gradient animate-pulse-ring flex size-10 shrink-0 items-center justify-center rounded-2xl shadow-lg">
             <BrainCircuit className="size-5 text-maroon-foreground" />
           </span>
           {!collapsed && (
             <div className="leading-tight">
-              <p className="text-sm font-semibold">EnO</p>
-              <p className="text-xs opacity-70">Workplace AI</p>
+              <p className="text-base font-extrabold tracking-tight">EnO</p>
+              <p className="text-[11px] uppercase tracking-[0.18em] opacity-60">Workplace AI</p>
             </div>
           )}
         </div>
@@ -55,19 +56,32 @@ export function AppSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Workspace</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-[10px] uppercase tracking-[0.2em] opacity-60">
+            Workspace
+          </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.url}>
-                  <SidebarMenuButton asChild isActive={pathname === item.url} tooltip={item.title}>
-                    <Link to={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+            <SidebarMenu className="gap-1">
+              {items.map((item) => {
+                const active = pathname === item.url;
+                return (
+                  <SidebarMenuItem key={item.url}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={active}
+                      tooltip={item.title}
+                      className="group/nav relative h-10 rounded-xl transition-all duration-300 data-[active=true]:shadow-lg"
+                    >
+                      <Link to={item.url}>
+                        {active && (
+                          <span className="bg-ember-gradient absolute left-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-r-full" />
+                        )}
+                        <item.icon className="transition-transform duration-300 group-hover/nav:scale-110" />
+                        <span className="font-medium">{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -75,9 +89,10 @@ export function AppSidebar() {
 
       <SidebarFooter>
         {!collapsed && (
-          <p className="px-2 pb-2 text-xs opacity-70">
-            AI outputs are drafts. Always review before sending or acting.
-          </p>
+          <div className="m-1 flex gap-2 rounded-xl bg-sidebar-accent/70 p-3 text-[11px] leading-relaxed opacity-90">
+            <ShieldCheck className="mt-0.5 size-4 shrink-0 text-sidebar-primary" />
+            <p>AI outputs are drafts. Always review before sending or acting.</p>
+          </div>
         )}
       </SidebarFooter>
     </Sidebar>
