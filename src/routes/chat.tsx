@@ -140,6 +140,13 @@ function ChatPage() {
               autoFocus
               placeholder="Ask about emails, planning, meetings or research…"
               onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  submit(input);
+                }
+              }}
             />
             <PromptInputFooter className="justify-end">
               <PromptInputSubmit status={status} disabled={!input.trim() && !busy} />
