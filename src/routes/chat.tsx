@@ -70,38 +70,46 @@ function ChatPage() {
   }
 
   return (
-    <div className="flex flex-col gap-6">
-      <header className="bg-hero-gradient flex flex-wrap items-center justify-between gap-3 rounded-2xl p-6 text-primary-foreground shadow-elegant">
-        <div className="flex items-center gap-3">
-          <span className="flex size-11 items-center justify-center rounded-xl bg-white/15">
+    <div className="flex flex-col gap-8">
+      <header className="bg-hero-gradient shadow-elegant relative flex flex-wrap items-center justify-between gap-4 overflow-hidden rounded-[1.75rem] p-7 text-primary-foreground md:p-10">
+        <div className="pointer-events-none absolute inset-0 opacity-25 mix-blend-overlay [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:20px_20px]" />
+        <div className="animate-float pointer-events-none absolute -right-16 -top-20 size-64 rounded-full bg-accent/50 blur-3xl" />
+        <div className="relative flex items-center gap-4">
+          <span className="flex size-14 items-center justify-center rounded-2xl border border-white/25 bg-white/15 backdrop-blur">
             <MessagesSquare className="size-5" />
           </span>
           <div>
-            <h1 className="text-2xl font-bold">AI Chatbot</h1>
-            <p className="text-sm opacity-85">Ask EnO anything about your work day.</p>
+            <h1 className="text-2xl font-black tracking-tight md:text-3xl">AI Chatbot</h1>
+            <p className="mt-1 text-sm opacity-85 md:text-base">
+              Ask EnO anything about your work day.
+            </p>
           </div>
         </div>
         {messages.length > 0 && (
-          <Button variant="secondary" size="sm" onClick={() => setMessages([])}>
+          <Button variant="secondary" size="sm" className="relative rounded-full" onClick={() => setMessages([])}>
             <RotateCcw /> New conversation
           </Button>
         )}
       </header>
 
-      <div className="flex min-h-[55vh] flex-col rounded-2xl border border-border bg-card shadow-soft">
+      <div className="glass gradient-border flex min-h-[58vh] flex-col overflow-hidden rounded-2xl">
         <Conversation className="flex-1">
           <ConversationContent>
             {messages.length === 0 && (
-              <div className="mx-auto max-w-md space-y-4 py-12 text-center">
+              <div className="mx-auto max-w-md space-y-4 py-14 text-center">
+                <span className="bg-primary-gradient animate-pulse-ring mx-auto flex size-12 items-center justify-center rounded-2xl text-primary-foreground">
+                  <MessagesSquare className="size-5" />
+                </span>
                 <p className="text-sm text-muted-foreground">
                   Start a conversation, or try one of these:
                 </p>
                 <div className="flex flex-col gap-2">
-                  {SUGGESTIONS.map((s) => (
+                  {SUGGESTIONS.map((s, i) => (
                     <button
                       key={s}
                       onClick={() => submit(s)}
-                      className="rounded-xl border border-border bg-secondary/50 px-4 py-3 text-left text-sm transition-colors hover:bg-secondary"
+                      style={{ animationDelay: `${i * 70}ms` }}
+                      className="animate-rise card-lift rounded-xl border border-border/70 bg-secondary/50 px-4 py-3 text-left text-sm"
                     >
                       {s}
                     </button>
@@ -109,6 +117,7 @@ function ChatPage() {
                 </div>
               </div>
             )}
+
 
             {messages.map((message) => (
               <Message key={message.id} from={message.role}>
