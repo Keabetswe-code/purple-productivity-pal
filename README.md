@@ -1,86 +1,316 @@
 # EnO — AI Workplace Productivity Assistant
 
-A modern, responsive SaaS-style web app that helps professionals automate everyday workplace
-tasks with AI: drafting emails, summarizing meetings, planning work, researching topics and
-chatting with an assistant.
+## Project Overview
 
-## Features
+**EnO** is a modern, responsive SaaS-style web application designed to help professionals improve workplace productivity using Artificial Intelligence (AI).
 
-| Module | What it does |
-| --- | --- |
-| **Smart Email Generator** (`/email`) | Structured prompt (recipient, purpose, tone, length, key points) → polished email draft. |
-| **Meeting Notes Summarizer** (`/meetings`) | Paste a transcript → summary, key decisions, action items with owners, risks. |
-| **AI Task Planner** (`/planner`) | Goals + capacity + working style → prioritised, time-blocked plan with next actions. |
-| **AI Research Assistant** (`/research`) | Research question + context → overview, findings, options, recommendation, what to verify. |
-| **AI Chatbot** (`/chat`) | Streaming conversational assistant for anything in between. |
+The application provides AI-powered tools for common workplace activities, including writing professional emails, summarising meeting notes, planning tasks, researching topics, and communicating with an AI assistant.
 
-Every generated output is **editable** (edit/preview toggle), copyable and downloadable as
-Markdown. Each screen carries a **Responsible AI disclaimer**.
+The application has a clean and modern user interface built around a **purple-led colour palette**, with **orange, maroon, white, and near-white accents**. The design is responsive and works across desktop, tablet, and mobile devices.
 
-## Design
+EnO uses AI to assist users with workplace tasks while maintaining a **Responsible AI approach**. Users are reminded to review AI-generated content, avoid entering confidential information, and remain accountable for decisions and actions based on AI outputs.
 
-- Purple-led SaaS palette with orange and maroon accents on a clean white/near-white surface.
-- All colors, gradients and shadows are semantic tokens in `src/styles.css` (oklch).
-- Collapsible sidebar navigation, sticky header, fully responsive from mobile to desktop.
+---
 
-## Tech stack
+## 1. Features Implemented
 
-- **Framework:** TanStack Start (React 19, Vite 7, SSR)
-- **Routing:** TanStack Router (file-based, `src/routes`)
-- **Styling:** Tailwind CSS v4 + shadcn/ui + AI Elements
-- **AI:** Vercel AI SDK via the Lovable AI Gateway (`google/gemini-3.7-flash`)
+### Smart Email Generator
 
-## Project structure
+**Route:** `/email`
 
-```
+The Smart Email Generator helps users create professional email drafts using structured information.
+
+Users can provide:
+
+* Recipient
+* Email purpose
+* Tone
+* Desired length
+* Key points
+
+The AI processes the information and generates a polished email draft that users can edit before using.
+
+### Meeting Notes Summarizer
+
+**Route:** `/meetings`
+
+The Meeting Notes Summarizer allows users to paste a meeting transcript and receive an organised summary.
+
+The generated output can include:
+
+* Meeting summary
+* Key decisions
+* Action items
+* Assigned owners
+* Risks or important issues
+
+This feature helps users quickly understand important information from meetings.
+
+### AI Task Planner
+
+**Route:** `/planner`
+
+The AI Task Planner helps users organise their work and prioritise tasks.
+
+Users provide information such as:
+
+* Goals
+* Available capacity
+* Working style
+
+The AI then generates a prioritised and time-blocked work plan containing practical next actions.
+
+### AI Research Assistant
+
+**Route:** `/research`
+
+The AI Research Assistant helps users explore workplace and general research questions.
+
+Users provide a research question and relevant context. The assistant generates:
+
+* Overview
+* Key findings
+* Available options
+* Recommendation
+* Information that should be independently verified
+
+### AI Chatbot
+
+**Route:** `/chat`
+
+The AI Chatbot provides a conversational interface where users can communicate with an AI assistant.
+
+The chatbot supports:
+
+* Conversational questions
+* Follow-up questions
+* Streaming AI responses
+* A focused message composer
+* Starting a new conversation
+
+### Editable AI Outputs
+
+All generated outputs can be:
+
+* Edited
+* Previewed
+* Copied
+* Downloaded as Markdown
+
+This allows users to review and customise AI-generated content before using it.
+
+### Responsive User Interface
+
+The application is designed to work across:
+
+* Desktop computers
+* Tablets
+* Mobile devices
+
+The interface includes a collapsible sidebar, sticky header, responsive layouts, and consistent navigation.
+
+### Responsible AI Disclaimer
+
+Each AI tool includes a Responsible AI disclaimer.
+
+Users are reminded that AI-generated content may be incomplete or inaccurate and should therefore be reviewed before being relied upon.
+
+---
+
+## 2. Technologies and Tools Used
+
+### Frontend
+
+* **React 19** — Used to build the application's user interface.
+* **TanStack Start** — Used as the full-stack React framework.
+* **TanStack Router** — Used for file-based application routing.
+* **Vite 7** — Used as the development and build tool.
+* **Tailwind CSS v4** — Used for responsive styling and layout.
+* **shadcn/ui** — Used for reusable user interface components.
+* **AI Elements** — Used for AI-related interface components such as chat messages, prompts, conversations, and loading states.
+
+### Backend
+
+The application does not require a separate backend server. Backend functionality is integrated into the TanStack Start application.
+
+Important backend files include:
+
+* `src/lib/ai.functions.ts`
+* `src/lib/ai-gateway.server.ts`
+* `src/routes/api/chat.ts`
+
+### Artificial Intelligence
+
+* **Vercel AI SDK** — Used to integrate AI functionality into the application.
+* **Lovable AI Gateway** — Used as the AI gateway provider.
+* **Google Gemini 3.7 Flash** — Used as the AI model.
+* **Zod** — Used for input validation.
+
+### Development Tools
+
+* **Bun** — Used as the JavaScript runtime and package manager.
+* **Visual Studio Code** — Used as the development environment.
+* **Git** — Used for version control.
+* **GitHub** — Used for source-code hosting and project management.
+
+---
+
+## 3. Project Structure
+
+```text
 src/
-  components/
-    ai-elements/        Chat primitives (conversation, message, prompt input, shimmer)
-    ui/                 shadcn/ui components
-    app-sidebar.tsx     Sidebar navigation
-    tool-workspace.tsx  Shared prompt form + editable output surface
-    responsible-ai.tsx  Responsible AI disclaimer
-  lib/
-    ai-gateway.server.ts  Server-only AI Gateway provider
-    ai.functions.ts       Server function powering the 4 generator tools
-  routes/
-    __root.tsx          App shell (sidebar, header, footer, toasts, metadata)
-    index.tsx           Dashboard
-    email | meetings | planner | research | chat
-    api/chat.ts         Streaming chat endpoint (AI SDK UI message stream)
+├── components/
+│   ├── ai-elements/
+│   │   └── Chat primitives such as conversation,
+│   │       message, prompt input and shimmer
+│   │
+│   ├── ui/
+│   │   └── shadcn/ui components
+│   │
+│   ├── app-sidebar.tsx
+│   │   └── Sidebar navigation
+│   │
+│   ├── tool-workspace.tsx
+│   │   └── Shared prompt form and editable output surface
+│   │
+│   └── responsible-ai.tsx
+│       └── Responsible AI disclaimer
+│
+├── lib/
+│   ├── ai-gateway.server.ts
+│   │   └── Server-only AI Gateway provider
+│   │
+│   └── ai.functions.ts
+│       └── Server functions powering the AI generator tools
+│
+└── routes/
+    ├── __root__.tsx
+    │   └── Application shell
+    │
+    ├── index.tsx
+    │   └── Dashboard
+    │
+    ├── email
+    │   └── Smart Email Generator
+    │
+    ├── meetings
+    │   └── Meeting Notes Summarizer
+    │
+    ├── planner
+    │   └── AI Task Planner
+    │
+    ├── research
+    │   └── AI Research Assistant
+    │
+    ├── chat
+    │   └── AI Chatbot
+    │
+    └── api/
+        └── chat.ts
+            └── Streaming chat endpoint
 ```
 
-## Backend
+---
 
-There is no separate server to run — backend logic lives in the same app:
+## 4. Setup Instructions
 
-- `src/lib/ai.functions.ts` — a typed `createServerFn` RPC endpoint. It validates input with Zod,
-  selects a tool-specific system prompt, calls the model and returns the completed text.
-- `src/routes/api/chat.ts` — an HTTP POST route that streams chat responses back to the browser
-  using the AI SDK UI message stream protocol.
-- `src/lib/ai-gateway.server.ts` — creates the AI Gateway provider. Server-only.
+### Prerequisites
 
-The `LOVABLE_API_KEY` secret is injected at runtime and is **never** exposed to the browser.
+Before running the project, make sure the following are installed:
 
-## Frontend
+* Bun
+* Git
+* Visual Studio Code
+* A valid Lovable AI Gateway API key
 
-- `ToolWorkspace` renders the structured prompt form (text, textarea and select fields), calls the
-  server function, renders Markdown output and supports inline editing, copy and download.
-- The chat page uses `useChat` with `DefaultChatTransport` pointed at `/api/chat`, rendering
-  `message.parts`, an optimistic thinking state and a focused composer. It is a single
-  session conversation — "New conversation" clears it.
+### Clone the Repository
 
-## Running locally
+Clone the project from GitHub:
+
+```bash
+git clone https://github.com/Keabetswe-code/purple-productivity-pal.git
+```
+
+Move into the project directory:
+
+```bash
+cd purple-productivity-pal
+```
+
+### Install Dependencies
+
+Install the required project dependencies using Bun:
 
 ```bash
 bun install
-bun run dev      # http://localhost:8080
-bun run build    # production build
+```
+
+### Configure the API Key
+
+The application requires the `LOVABLE_API_KEY` environment variable for AI functionality.
+
+Create a `.env` file in the project root and add:
+
+```env
+LOVABLE_API_KEY=your_api_key_here
+```
+
+Replace `your_api_key_here` with your actual API key.
+
+**Important:** Do not commit your `.env` file or API key to GitHub.
+
+### Run the Development Server
+
+Start the application using:
+
+```bash
+bun run dev
+```
+
+The application will be available at:
+
+```text
+http://localhost:8080
+```
+
+### Build the Application
+
+To create a production build, run:
+
+```bash
+bun run build
+```
+
+### Run Linting
+
+To check the project for linting issues, run:
+
+```bash
 bun run lint
 ```
 
+---
+
 ## Responsible AI
 
-EnO produces drafts that can be incomplete or inaccurate. Review and edit every output, avoid
-entering confidential or personal data, and keep a human accountable for anything sent or acted
-upon. AI outputs are not legal, financial, medical or HR advice.
+EnO is designed to support human productivity rather than replace human judgement.
+
+AI-generated content may be incomplete, inaccurate, or unsuitable for a particular situation. Users should review and edit generated content before using it.
+
+Users should:
+
+* Review all AI-generated outputs.
+* Avoid entering confidential or sensitive information.
+* Verify important information independently.
+* Remain responsible for anything sent, published, or acted upon.
+* Avoid treating AI-generated responses as professional legal, financial, medical, or HR advice.
+
+The AI assistant is intended to be a **productivity support tool**, with final decisions remaining with the user.
+
+---
+
+## Conclusion
+
+EnO combines modern web development technologies with AI capabilities to provide a practical workplace productivity platform.
+
+The application brings multiple workplace tools into one responsive interface, allowing users to generate emails, summarise meetings, plan tasks, conduct research, and communicate with an AI assistant from a single application.
